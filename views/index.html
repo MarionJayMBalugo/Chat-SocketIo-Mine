@@ -7,18 +7,18 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
   crossorigin="anonymous">
 <link rel="stylesheet" href="stylesheets/style.css">
-
 <body>
-
-
   <h1>chat app</h1>
   <p id="user">marion</p>
+  
   <input type="text" placeholder="your username please" id="usernameGenerator"/>
   <div class="card rare-wind-gradient chat-room">
     <div class="card-body">
       <div class="row px-lg-2 px-2">
         <div class="col-md-6 col-xl-4 px-0">
-          <h6 class="font-weight-bold mb-3 text-center text-lg-left">Member</h6>
+            <p id="counter">0 number of online user/s</p>
+          <h6 class="font-weight-bold mb-3 text-center text-lg-left">Member/s</h6>
+          
           <div class="white z-depth-1 px-2 pt-3 pb-0 members-panel-1 scrollbar-light-blue">
             <ul class="list-unstyled friend-list">
               <li class="active grey lighten-3 p-2">
@@ -86,26 +86,12 @@
                   </div>
                 </a>
               </li>
-              <li class="p-2">
-                <a href="#" class="d-flex justify-content-between">
-                  <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" alt="avatar" class="avatar rounded-circle d-flex align-self-center mr-2 z-depth-1">
-                  <div class="text-small">
-                    <strong>Lara Croft</strong>
-                    <p class="last-message text-muted">Lorem ipsum dolor sit.</p>
-                  </div>
-                  <div class="chat-footer">
-                    <p class="text-smaller text-muted mb-0">Yesterday</p>
-                    <span class="text-muted float-right"><i class="fas fa-mail-reply" aria-hidden="true"></i></span>
-                  </div>
-                </a>
-              </li>          
+                      
             </ul>
           </div>
         </div>
         <div class="col-md-6 col-xl-8 pl-md-3 px-lg-auto px-0">
-
           <div class="chat-message">
-
             <ul class="list-unstyled chat-1 scrollbar-light-blue" id="chatbox">
             </ul>
             <div class="white">
@@ -114,66 +100,14 @@
               </div>
             </div>
             <button type="button" class="btn btn-primary">Send</button>
-
           </div>
-
         </div>
-        <!-- Grid column -->
-      </div>
-      <!-- Grid row -->
+      </div> 
     </div>
   </div>
+
   <script src="/socket.io/socket.io.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-  <script>
-    $(() => {
-      var socket = io()
-      $('.btn').click((e) => {
-        e.preventDefault()
-        alert($('#usernameGenerator').val())
-        socket.emit('chat message', $('#m').val(), $('#usernameGenerator').val())
-
-        $('#m').val('')
-        return false
-      })
-      socket.on('chat message', function (msg, user) {
-        var text = ""
-
-        if ($('#chatbox li:last-child').find('#name').text() == user) {
-          $('#chatbox li:last-child').find('p').append("<br>" + msg + "<br>")
-        } else {
-          if (user == $('#usernameGenerator').val()) {
-            text = "<li class='d-flex justify-content-between mb-4 pb-3'>" +
-              "<img src='/assets/unknown.jpg' alt='avatar' class='avatar rounded-circle d-flex align-self-center mr-2 z-depth-1' id='userImg'>" +
-              "<div class='chat-body white p-3 ml-2 z-depth-1'>" +
-              "<div class='header'>" +
-              "<strong class='primary-font' id='name'>" + user + "</strong>" +
-              "<small class='pull-right text-muted'><i class='far fa-clock'></i> 12 mins ago</small>" +
-              "</div>" +
-              "<hr class='w-100'>" +
-              "<p class='mb-0'>" + msg + "</p>" +
-              "</div>" +
-              "</li>"
-
-          } else {
-            text = "<li class='d-flex justify-content-between mb-4'>" +
-              "<div class='chat-body white p-3 z-depth-1'>" +
-              "<div class='header'>" +
-              "<strong class='primary-font' id='name'>" + user + "</strong>" +
-              "<small class='pull-right text-muted'><i class='far fa-clock'></i> 13 mins ago</small>" +
-              "</div>" +
-              "<hr class='w-100'>" +
-              "<p class='mb-0'>" + msg + "</p>" +
-              "</div>" +
-              "<img src='/assets/unknown.jpg' alt='avatar' class='avatar rounded-circle d-flex align-self-center mr-2 z-depth-1' id='userImg'>" +
-              "</li>"
-          }
-        }
-        $('#chatbox').append(text);
-      })
-    })
-
-  </script>
+  <script src="/scripts/controller.js"> </script>
 </body>
-
 </html>
